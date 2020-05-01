@@ -34,3 +34,10 @@ firebase deploy
 ----
 Enable DB in firebase console and create collection and add some documents to it
 Test it out in the functions created
+
+----
+Adding Express to the Project
+Add Routes
+
+-----
+Authentication and Signing up users
