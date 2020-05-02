@@ -6,6 +6,9 @@ Technical Stack of the Project
 4. Express JS
 5. Redux / React-Redux
 
+Other Plugins:
+1. BusBoy
+
 Pre Install the following:
 
 1. NodeJS
