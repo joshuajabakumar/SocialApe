@@ -18,6 +18,10 @@ Pre Install the following:
 5. ES7 React/Redux/GraphQL/React-Native snippets
 
 Github Link: https://github.com/joshuajabakumar/SocialApe
+Reference Playlist: https://www.youtube.com/watch?v=uu43m1SpbTA&list=PLMhAeHCz8S38ryyeMiBPPUnFAiWnoPvWP&index=12
+Dashboard: https://console.firebase.google.com/u/0/project/socialape-46d95/settings/general/web:Mzc2ZDQyMzUtMTRkMy00ZTBiLThlNzEtMTFiYjY0MGVjMjM4
+Complete Github Code Reference: https://github.com/hidjou/classsed-react-firebase-functions/blob/master/functions/index.js
+
 ----
 Create Project in Google Firebase console and activate functions
 
