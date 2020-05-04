@@ -5,8 +5,9 @@ const firebaseConfig = require('../util/config');
 const firebase = require('firebase');
 firebase.initializeApp(firebaseConfig);
 
-const { validateSignUpData, validateLoginData } = require('../util/validators');
+const { validateSignUpData, validateLoginData, reduerUserDetails } = require('../util/validators');
 
+// Signup
 exports.signUp = (request, response)=>{
 
     // Get new user details from the request body
@@ -67,6 +68,7 @@ exports.signUp = (request, response)=>{
     
 }
 
+// Login
 exports.login = (request, response)=>{
     const user = {
         email: request.body.email,
@@ -97,6 +99,49 @@ exports.login = (request, response)=>{
     }); 
 }
 
+// Add User Details
+exports.addUserDetails = (request, response) => {
+    let userDetails = reduerUserDetails(request.body);
+
+    console.log(`The user Details ${userDetails}`);
+    console.log(userDetails);
+
+    db.doc(`/users/${request.user.handle}`).update(userDetails)
+    .then(()=> {
+        return response.status(200).json({ message: 'Details added successfully' });
+    })
+    .catch(err => {
+        console.error(err);
+        response.status(500).json({ error: err.code });
+    })
+}
+
+// Get Authenticated User Details
+exports.getAuthenticatedUser = (request, response) => {
+    let userData = {};
+
+    db.doc(`/users/${request.user.handle}`).get()
+    .then(doc => {
+        if(doc.exists){
+            userData.credentials = doc.data();
+            return db.collection('likes').where('userHandle', '==', request.user.handle).get()
+            .then(data => {
+                userData.likes = [];
+                data.forEach(doc => {
+                    userData.likes.push(doc.data());
+                })
+
+                return response.status(200).json(userData);
+            })
+            .catch(err => {
+                console.error(err);
+                return response.status(500).json({ error : err.code});
+            })
+        }
+    })
+}
+
+// Upload User Image
 exports.uploadImage = (request, response)=>{
     const BusBoy = require('busboy');
     const path = require('path');
